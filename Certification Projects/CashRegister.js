@@ -24,33 +24,32 @@ function checkCashRegister(price, cash, cid) {
     return changeObject
 
   } else {
-    var auxChange = changeDue * 100, auxCid = cid.map(item => ([item[0],item[1]*100])), arrayNotEmpty = false;
+    let auxChange = changeDue.toFixed(2) * 100, auxCid = cid.map(item => ([item[0],(item[1]*100).toFixed(2)]));
+
     for (let i = cid.length - 1; i >= 0; i--) {
-    console.log(amountInPennies[auxCid[i][0]]); 
-    console.log(auxChange);
-      if (amountInPennies[auxCid[i][0]] = auxChange && auxChange <= cidInPennies){
-        let changeValue = (auxChange/auxCid[i][1]) * amountInPennies[auxCid[i][0]];
-        changeValue = Math.floor(changeValue.toFixed(2)) * amountInPennies[auxCid[i][0]]/100;
-        changeObject.change.push([auxCid[i][0], changeValue])
-        arrayNotEmpty = true;
-        auxChange -= changeValue * 100;
+      if (amountInPennies[auxCid[i][0]] <= auxChange) {
+        let accumulator = 0;
+        while (auxCid[i][1] >= amountInPennies[auxCid[i][0]] && auxChange >= amountInPennies[auxCid[i][0]]) {
+          auxCid[i][1] -= amountInPennies[auxCid[i][0]];
+          auxChange -= amountInPennies[auxCid[i][0]];
+          accumulator += amountInPennies[auxCid[i][0]];
+        }
+        accumulator /= 100;
+        changeObject.change.push([auxCid[i][0], accumulator]);
         changeObject.status = "OPEN";
-      }
-  }
-  if (arrayNotEmpty) {
-    console.log(changeObject);
-    let changeSum = changeObject.change.map(item => (item[1]*100)).reduce((acc, curr) => acc + curr)/100;
+    } 
+  } 
+  let changeSum = changeObject.change.map(item => (item[1]*100)).reduce((acc, curr) => acc + curr)/100;
     if (changeSum < changeDue) {
       console.log(changeObject);
       changeObject.status = "INSUFFICIENT_FUNDS";
-      changeObject.change = []; 
-    } else {
+      changeObject.change = [];
       return changeObject
-    }
   }
+
   console.log(changeObject);
   return changeObject
-  }
+}
 }
 
 
