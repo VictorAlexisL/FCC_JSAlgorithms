@@ -1,3 +1,4 @@
+//Made by Victor Alexis
 //https://www.freecodecamp.org/VictorAlexisL
 
 function palindrome(str) {
@@ -12,4 +13,4 @@ function palindrome(str) {
   } else {
     return false
   }
-}
+};

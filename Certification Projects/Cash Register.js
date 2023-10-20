@@ -1,3 +1,6 @@
+//Made by Victor Alexis
+//https://www.freecodecamp.org/VictorAlexisL
+
 const amountInPennies = {  
   'ONE HUNDRED': 10000,
   'TWENTY': 2000,
@@ -8,10 +11,10 @@ const amountInPennies = {
   'DIME': 10,
   'NICKEL': 5,
   'PENNY': 1
-}
+};
 
 function checkCashRegister(price, cash, cid) {
-  let changeObject = {status: "INSUFFICIENT_FUNDS", change: []}
+  let changeObject = {status: "INSUFFICIENT_FUNDS", change: []};
   let changeDue = cash - price;
   let cidInPennies = cid.map(item => (item[1]*100)).reduce((acc, curr) => acc + curr);
 
@@ -49,8 +52,6 @@ function checkCashRegister(price, cash, cid) {
 
   console.log(changeObject);
   return changeObject
-}
-}
+  }
+};
 
-
-checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
