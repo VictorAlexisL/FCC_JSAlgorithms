@@ -1,3 +1,6 @@
+//Made by Victor Alexis
+//https://www.freecodecamp.org/VictorAlexisL
+
 function whatIsInAName(collection, source) {
   const returnArray = [];
   for(let element of Object.keys(source)) {
